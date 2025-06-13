@@ -1,0 +1,29 @@
+//Topics: Binary Search, arrays 
+class Solution {
+    public int getHours(int[] arr, int s){ // Find the total hours required given the bananas per time's'   
+        int time = 0;
+        for(int a : arr){
+            time += Math.ceil((double)a/(double)s);
+        }
+        return time;
+    }
+    public int kokoEat(int[] arr, int k) {
+        // code here
+        int low = 1 , high = arr[0];
+        for(int a : arr){   // finds the upper-bound of the BS
+            max = Math.max(a,max);
+        }
+        while(low<=high){   // Binary Search
+            int mid = low + (high-low)/2;
+            int val = getHours(arr,mid);
+            if(val<=k){
+                high = mid - 1;
+            } 
+            else  low = mid + 1;
+        }
+        return low;
+    }
+}
+
+//T.C.: O(nlogm) , m = max of array
+//A.S.: O(1)
