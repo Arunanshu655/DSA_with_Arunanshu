@@ -1,0 +1,31 @@
+Topics: Array, Binary Search, Greedy Method
+
+class Solution {
+    public boolean isPossible(int[] nums, int p, int k){ //check if atleast 'p' paris can be made assuming answer is 'k'
+        int n = nums.length;
+        int cnt = 0; // counts the numbers of paris can be made
+        for(int i = 1 ; i < n ; i++){
+            if((nums[i]-nums[i-1])<=k){
+                cnt++;
+                i++; // if pairs can be made then skip the current nums[i]
+            }
+        }
+        return (cnt>=p);
+    }
+    public int minimizeMax(int[] nums, int p) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        int low = 0 , high = nums[n-1] - nums[0] , res = 0;
+        while(low<=high){
+            int mid = low + (high-low)/2;
+            if(isPossible(nums,p,mid)){ //Binary search
+                res = mid; 
+                high = mid - 1; // check for more minimized values
+            }else low = mid + 1; //Increament of the maximum value
+        }
+        return res;
+    }
+}
+
+// Time Complexity: O(nlogm)  , m = diff b/w max and min element
+// Auxilary Space: O(1)
