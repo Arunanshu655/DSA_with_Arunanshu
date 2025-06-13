@@ -11,7 +11,7 @@ class Solution {
         // code here
         int low = 1 , high = arr[0];
         for(int a : arr){   // finds the upper-bound of the BS
-            max = Math.max(a,max);
+            high = Math.max(a,high);
         }
         while(low<=high){   // Binary Search
             int mid = low + (high-low)/2;
