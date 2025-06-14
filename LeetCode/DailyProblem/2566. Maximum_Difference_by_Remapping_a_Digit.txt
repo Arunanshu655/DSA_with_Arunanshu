@@ -1,0 +1,34 @@
+Topics: Math , Greedy
+
+class Solution {
+    public int minMaxDifference(int num) {
+        String str = String.valueOf(num);
+        int idx = 0; // index for first non-nine digit;
+        int n = str.length();
+        for(int i = 0 ; i<n ; i++){ // first non-nine digit from left
+            if(str.charAt(i)!='9'){
+                idx = i;
+                break;
+            }
+        }
+
+        String maxStr = ""; // For max integer possible
+        for(int i = 0 ; i<n ; i++){
+            if(str.charAt(i)==str.charAt(idx)){
+                maxStr += '9';
+            }else maxStr += str.charAt(i);
+        }
+        String minStr = "";// minimum integer possible
+        for(int i = 0 ; i<n ; i++){
+            if(str.charAt(i)==str.charAt(0)){
+                minStr += '0';
+            }else minStr += str.charAt(i);
+        }
+        int max = Integer.parseInt(maxStr);
+        int min = Integer.parseInt(minStr);
+        return (max-min);
+    }
+}
+
+Time Complexity: O(n)
+Space Complexity: O(n)
