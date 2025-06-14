@@ -1,0 +1,18 @@
+//Topic: Tree , Recursion
+
+class Solution {
+    public boolean isSymmetric(Node root) {
+        // Code here
+        if(root==null) return true;
+        return isMirror(root.left,root.right); 
+    }
+    public boolean isMirror(Node left,Node right){
+        if(left==null && right==null) return true;
+        if(left==null || right==null) return false;
+        
+        return (right.data==left.data) && isMirror(left.left,right.right)&&isMirror(left.right,right.left);
+    }
+}
+
+//Time Complexity:O(N)
+//Auxiliary Space: O(h) , worst-case: h = N ,best-case: h = logN
