@@ -1,0 +1,43 @@
+Topics: Math, Greedy
+
+class Solution {
+    public int maxDiff(int num) {
+    String str = String.valueOf(num);
+    int n = str.length();
+    
+    // Generate the maximum number by replacing one digit with 9
+    String maxStr = str;
+    for (int i = 0; i < n; i++) {
+        char c = str.charAt(i);
+        if (c != '9') {
+            maxStr = str.replace(c, '9');
+            break;
+        }
+    }
+    
+    // Generate the minimum number
+    String minStr = str;
+    if (str.charAt(0) != '1') {
+        // If first digit is not 1, replace it with 1
+        char toReplace = str.charAt(0);
+        minStr = str.replace(toReplace, '1');
+    } else {
+        // Find the first digit > 1 and replace it with 0
+        for (int i = 1; i < n; i++) {
+            char c = str.charAt(i);
+            if (c > '1') {
+                minStr = str.replace(c, '0');
+                break;
+            }
+        }
+    }
+    
+    int max = Integer.parseInt(maxStr);
+    int min = Integer.parseInt(minStr);
+    return max - min;
+    }
+}
+
+
+Time Complexity: O(n) n = no. of digits
+Auxiliary Space: O(n)
