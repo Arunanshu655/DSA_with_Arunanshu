@@ -1,8 +1,8 @@
-Topics: Binary Search , Arrays
+Topics: Binary Search, Arrays
 
 
 class Solution {
-    boolean isValid(int[] arr,int mid,int k){
+    boolean isValid(int[] arr, int mid, int k){
         int sum = 0;
         for(int a : arr){
             sum += Math.ceil((double)a/mid);
