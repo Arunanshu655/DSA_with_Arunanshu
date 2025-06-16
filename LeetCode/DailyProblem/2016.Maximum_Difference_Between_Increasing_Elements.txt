@@ -1,0 +1,36 @@
+Topic: Array
+
+//Brute force
+
+class Solution {
+    public int maximumDifference(int[] nums) {
+        int n = nums.length;
+        int ans = -1;
+        for(int i = 0 ; i < n ; i++ ){
+            for(int j = i+1 ; j < n ; j++){
+                ans = Math.max(ans,nums[j]-nums[i]);
+            }
+        }
+        return ans;
+    }
+}
+Time Complexity: O(n^2)
+Auxiliary Space: O(1)
+
+//Optimized approach
+
+class Solution {
+    public int maximumDifference(int[] nums) {
+        int n = nums.length;
+        int min = nums[0];
+        int ans = -1;
+        for(int num : nums){
+           min = Math.min(min,num);
+           if(num>min) ans = Math.max(num-min,ans);
+        }
+        return ans;
+    }
+}
+
+Time Complexity: O(n)
+Auxiliary Space: O(1)
