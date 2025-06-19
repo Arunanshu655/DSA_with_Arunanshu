@@ -1,0 +1,38 @@
+Topics: Sorting(count sort), String
+
+class Solution {
+    
+    public static String caseSort(String s) {
+        // code here
+        //frequency arrays for lower and upper cases
+       int upper[] = new int[26];
+       int lower[] = new int[26];
+       
+       int n = s.length();
+       StringBuilder ans = new StringBuilder(n);
+       //count of frequencies
+       for(int i = 0 ; i < n ; i++){
+           char ch = s.charAt(i);
+           if((int)ch < 97 ) upper[ch-'A']++;
+           else lower[ch-'a']++;
+       }
+       int u = 0 , l = 0;
+       for(int i = 0 ; i<n ; i++){
+           char ch = s.charAt(i);
+           if((int)ch < 97){
+               while(upper[u]==0) u++;
+               ans.append((char)('A' + u));
+               upper[u]--;
+           }else {
+               while(lower[l]==0) l++;
+               ans.append((char)('a' + l));
+               lower[l]--;
+           }
+       }
+       
+       return ans.toString();
+    }
+}
+
+Time Complexity: O(n)
+Auxiliary Space: O(n)
