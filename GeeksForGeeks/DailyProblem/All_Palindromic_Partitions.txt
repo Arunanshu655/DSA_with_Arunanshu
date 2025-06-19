@@ -1,0 +1,42 @@
+Topics: Backtracking, Dynamic Programming, Recursion, Palindrome, Structures
+
+class Solution {
+    public boolean isPali(String s){
+        int n = s.length();
+        for(int i = 0 ; i < n ; i++){
+            if(s.charAt(i) != s.charAt(n-i-1)) return false;
+        }
+        return true;
+    }
+    public void solve(String s, int idx, int n, String str, ArrayList<String> temp, ArrayList<ArrayList<String>> ans){
+        if(idx==n-1){
+        str += s.charAt(idx);  // Safely access last character
+        if (!isPali(str)) return;
+        temp.add(str);
+        ans.add(new ArrayList<>(temp));
+        temp.remove(temp.size() - 1); // Backtrack
+        return;
+        }
+        str += s.charAt(idx); // Extend current string
+    
+        if (isPali(str)) {
+            temp.add(str);
+            solve(s, idx + 1, n, "", temp, ans);
+            temp.remove(temp.size() - 1); // Backtrack
+        }
+    
+        solve(s, idx + 1, n, str, temp, ans);
+        
+    }
+    public ArrayList<ArrayList<String>> palinParts(String s) {
+        // code here
+        ArrayList<String> temp = new ArrayList<>();
+        ArrayList<ArrayList<String>> ans = new ArrayList<>();
+        int n = s.length();
+        solve(s, 0, n, "", temp, ans);
+        return ans;
+    }
+}
+
+Time Complexity: O(2^n * n)
+Auxiliary Space: O(2^n * n)
