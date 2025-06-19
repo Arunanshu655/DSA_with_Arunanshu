@@ -1,0 +1,25 @@
+Topics: Sorting, Greedy, Arrays
+
+class Solution {
+    public int[][] divideArray(int[] nums, int k) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        int idx = 0 , i = 0 , j = 0;
+        int[][] ans = new int[n/3][3];
+        for(int l = 0 ; l < n ; l += 3){
+            if(nums[l+2]-nums[l]>k) return new int[0][0];
+        }
+        while(idx<n){
+           ans[i][j] = nums[idx++];
+           j++;
+           if(j==3){
+            i++;
+            j = 0;
+           } 
+        }
+        return ans;
+    }
+}
+
+Time Complexity: O(n)
+Auxiliary Space: O(n)
