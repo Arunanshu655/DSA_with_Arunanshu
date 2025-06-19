@@ -1,0 +1,20 @@
+Topics: Greedy, Sorting
+
+class Solution {
+    public int partitionArray(int[] nums, int k) {
+        Arrays.sort(nums);
+        int cnt = 1;
+        int minVal = nums[0];
+        int n = nums.length;
+        for(int i = 0 ; i < n ; i++){
+            if(nums[i]-minVal>k){
+                minVal = nums[i];
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+}
+
+Time Complexity: O(nlogn)
+Auxiliary Space: O(1)
