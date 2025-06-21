@@ -1,0 +1,32 @@
+Topics: Math , Counting , String
+
+class Solution {
+    public int maxDistance(String s, int k) {
+          int ans = 0 ; 
+          int n = s.length();
+          for(char hor : new char[]{'E','W'}){
+            for(char ver : new char[]{'N','S'}){
+                int k1 = k , netX = 0 , netY = 0;
+                for(int i = 0 ; i < n ; i++){
+                    char ch = s.charAt(i);
+                    if((ch == hor) && k1 > 0){
+                        ch = (ch == 'W') ? 'E' : 'W';
+                        k1--;
+                    }else if((ch == ver) && k1 > 0){
+                        ch = (ch == 'N') ? 'S' : 'N';
+                        k1--;
+                    }
+                    netX += (ch == 'E') ? 1 : 0;
+                    netX -= (ch == 'W') ? 1 : 0;
+                    netY += (ch == 'N') ? 1 : 0;
+                    netY -= (ch == 'S') ? 1 : 0;
+                    ans = Math.max(ans,Math.abs(0-netX)+Math.abs(0-netY));
+                }
+            }
+          }
+          return ans;
+    }
+}
+
+Time Complexity: O(n)
+Auxiliary Space: O(1)
