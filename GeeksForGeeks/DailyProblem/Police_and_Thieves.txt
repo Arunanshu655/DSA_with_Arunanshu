@@ -1,0 +1,25 @@
+Topics: Greedy
+class Solution {
+    public int catchThieves(char[] arr, int k) {
+        // code here
+        int p = 0 , t = 0 , cnt = 0;
+        int n = arr.length;
+        while(p<n && arr[p]!='P') p++;
+           while(t<n && arr[t]!='T') t++;
+        while(p<n && t<n){
+           if(Math.abs(p-t)<=k){
+               cnt++;
+               p++;
+               t++;
+           }else if(p<t) p++;
+           else if(t<p) t++;
+           while(p<n && arr[p]!='P') p++;
+           while(t<n && arr[t]!='T') t++;
+        }
+        return cnt;
+        
+    }
+}
+
+Time Complexity: O(n)
+Auxiliary Space: O(1)
