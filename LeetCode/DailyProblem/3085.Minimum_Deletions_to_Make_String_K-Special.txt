@@ -1,0 +1,29 @@
+Topics: Greedy , HashTable , Counting
+
+class Solution {
+    public int minimumDeletions(String word, int k) {
+        HashMap<Character,Integer> freq = new HashMap<>();
+        int n = word.length();
+        for(int i = 0 ; i < n ; i++){
+            char ch = word.charAt(i);
+            freq.put(ch,freq.getOrDefault(ch,0)+1);
+        }
+        
+        int res = Integer.MAX_VALUE;
+        for(Character key1 : freq.keySet()){
+            int val1 = freq.get(key1);
+            int temp = 0;
+            for(Character key2 : freq.keySet()){
+                int val2 = freq.get(key2); 
+                int diff = val2 - val1;
+                if(diff<0) temp += val2;
+                else if(diff>k) temp += (diff-k);
+            }
+            res = Math.min(res,temp);
+        }
+        return res;
+    }
+}
+
+Time Complexity: O(n)
+Auxiliary Space: O(1)
