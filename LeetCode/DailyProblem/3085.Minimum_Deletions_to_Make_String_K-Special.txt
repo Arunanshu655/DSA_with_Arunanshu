@@ -1,4 +1,4 @@
-Topics: Greedy , HashTable , Counting
+Topics: Greedy, HashTable, Counting
 
 class Solution {
     public int minimumDeletions(String word, int k) {
