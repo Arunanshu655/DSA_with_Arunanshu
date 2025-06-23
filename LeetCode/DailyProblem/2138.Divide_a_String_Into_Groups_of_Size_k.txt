@@ -1,0 +1,29 @@
+Topics: Simulation, String
+
+class Solution {
+    public String[] divideString(String s, int k, char fill) {
+        int idx = 0 , n = s.length();
+        ArrayList<String> ans = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        while(idx<n){
+            for(int i = 0 ; i < k ; idx++ , i++){
+                if(idx==n) break;
+                sb.append(s.charAt(idx));
+            }
+            if(sb.length()!=k) break;
+            ans.add(sb.toString());
+            sb = new StringBuilder("");
+        }
+        if(sb.length()!=0){
+            for( ; sb.length() < k ; ){
+                sb.append(fill);
+            }
+        }
+        if(sb.length()!=0) ans.add(sb.toString());
+        
+        return ans.toArray(new String[0]);
+    }
+}
+
+Time Complexity: O(n);
+Auxiliary Space: O(n/k);
