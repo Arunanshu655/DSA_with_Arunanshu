@@ -1,0 +1,45 @@
+Topics: Sorting
+
+class Solution {
+    String minSum(int[] arr) {
+        // code here
+        Arrays.sort(arr);
+        // Use two queues to simulate the two numbers
+        LinkedList<Integer> num1 = new LinkedList<>();
+        LinkedList<Integer> num2 = new LinkedList<>();
+        
+        for (int i = 0; i < arr.length; i++) {
+            if (i % 2 == 0)
+                num1.add(arr[i]);
+            else
+                num2.add(arr[i]);
+        }
+
+        // Now simulate addition digit by digit from the back
+        LinkedList<Integer> result = new LinkedList<>();
+        int carry = 0;
+
+        while (!num1.isEmpty() || !num2.isEmpty() || carry != 0) {
+            int d1 = num1.isEmpty() ? 0 : num1.removeLast();
+            int d2 = num2.isEmpty() ? 0 : num2.removeLast();
+            int sum = d1 + d2 + carry;
+            result.addFirst(sum % 10);
+            carry = sum / 10;
+        }
+
+        // Remove leading zeros
+        while (result.size() > 1 && result.getFirst() == 0) {
+            result.removeFirst();
+        }
+
+        // Build result string
+        StringBuilder sb = new StringBuilder();
+        for (int digit : result)
+            sb.append(digit);
+
+        return sb.toString();
+    }
+}
+
+Time Complexity: O(nlogn);
+Auxiliary Space: O(n)
