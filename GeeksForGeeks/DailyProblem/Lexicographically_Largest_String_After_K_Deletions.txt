@@ -1,0 +1,23 @@
+Topics: Stack, Greedy
+
+class Solution {
+    public static String maxSubseq(String s, int k) {
+        // code here
+        int n = s.length();
+        int m = n - k;
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0 ; i < n ; i++){
+            char ch = s.charAt(i);
+            while(sb.length() > 0 && sb.charAt(sb.length()-1) < ch && k>0){
+                k--;
+                sb.deleteCharAt(sb.length() - 1);
+            }
+            sb.append(ch);
+        }
+        while(sb.length()>m) sb.deleteCharAt(sb.length() - 1);
+        return sb.toString();
+    }
+}
+
+Time Complexity: O(n);
+Auxiliary Space: O(n);
