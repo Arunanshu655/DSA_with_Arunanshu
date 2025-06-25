@@ -1,0 +1,35 @@
+Topics: Hash, String
+
+class Solution {
+    boolean sameFreq(String s) {
+        int[] freq = new int[26];
+        for (char c : s.toCharArray()) freq[c - 'a']++;
+        
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int f : freq) {
+            if (f > 0) map.put(f, map.getOrDefault(f, 0) + 1);
+        }
+
+        if (map.size() == 1) return true;
+        if (map.size() > 2) return false;
+
+        int[] keys = new int[2], values = new int[2];
+        int i = 0;
+        for (int k : map.keySet()) {
+            keys[i] = k;
+            values[i] = map.get(k);
+            i++;
+        }
+
+        if ((keys[0] == 1 && values[0] == 1) || (keys[1] == 1 && values[1] == 1)) return true;
+        if (Math.abs(keys[0] - keys[1]) == 1) {
+            if ((keys[0] > keys[1] && values[0] == 1) || (keys[1] > keys[0] && values[1] == 1)) return true;
+        }
+
+        return false;
+    }
+}
+
+
+Time Complexity: O(n)
+Auxiliary Space: O(1)
