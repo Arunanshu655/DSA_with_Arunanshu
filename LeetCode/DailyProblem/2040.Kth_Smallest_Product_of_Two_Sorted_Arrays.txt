@@ -1,0 +1,67 @@
+Topics: Binary Search, Arrays
+
+class Solution {
+        public long countPos(int num, int[] nums, long m) {
+        int l = 0, r = nums.length - 1;
+        int res = -1;
+        while (l <= r) {
+            int j = l + (r - l) / 2;
+            if ((long) num * nums[j] <= m) {
+                res = j;
+                l = j + 1;
+            } else {
+                r = j - 1;
+            }
+        }
+        return res + 1;
+    }
+
+    public long countNeg(int num, int[] nums, long m) {
+        int l = 0, r = nums.length - 1;
+        int res = nums.length;
+        while (l <= r) {
+            int j = l + (r - l) / 2;
+            if ((long) num * nums[j] <= m) {
+                res = j;
+                r = j - 1;
+            } else {
+                l = j + 1;
+            }
+        }
+        return nums.length - res;
+    }
+
+    public long countMul(int[] nums1, int[] nums2, long mid) {
+        long cnt = 0;
+        for (int num : nums1) {
+            if (num > 0) {
+                cnt += countPos(num, nums2, mid);
+            } else if (num < 0) {
+                cnt += countNeg(num, nums2, mid);
+            } else {
+                if (mid >= 0) cnt += nums2.length;
+            }
+        }
+        return cnt;
+    }
+
+    public long kthSmallestProduct(int[] nums1, int[] nums2, long k) {
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        long l = -10000000000L, r = 10000000000L;
+        while (l < r) {
+            long mid = l + (r - l) / 2;
+            if (countMul(nums1, nums2, mid) < k) {
+                l = mid + 1;
+            } else {
+                r = mid;
+            }
+        }
+        return l;
+    }
+
+}
+
+
+Time Complexity: O(log(MAX_MULTIPLICATION).nlogm)
+Auxiliary Space: O(1)
