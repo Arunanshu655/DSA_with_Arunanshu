@@ -1,0 +1,30 @@
+Topics: Heap(PriorityQueue), Sorting
+
+class Solution {
+    public int[] maxSubsequence(int[] nums, int k) {
+           int n = nums.length;
+           PriorityQueue<Integer> pq = new PriorityQueue<>((a,b)->nums[a]-nums[b]); // --O(k)
+            for(int i = 0 ; i < n ; i++){ // --O(n)
+                    if(pq.size()==k){
+                       if(nums[i]>nums[pq.peek()]){
+                        pq.poll();
+                        pq.add(i); // --O(logn) * O(n)
+                       }
+                    }else{
+                       pq.add(i); // --O(logn) * O(n)
+                    }
+            }
+            int[] ans = new int[k]; // --O(k)
+            int idx = 0;
+            while(!pq.isEmpty()){   // -- O(k)
+                ans[idx] = pq.poll();
+                idx++;
+            }
+            Arrays.sort(ans); //--O(nlogn)
+            for(int i = 0 ; i < k ; i++) ans[i] = nums[ans[i]]; // --O(k)
+            return ans;
+    }
+}
+
+Time Complexity: O(nlogn + k)
+Auxiliary Space: O(k)
