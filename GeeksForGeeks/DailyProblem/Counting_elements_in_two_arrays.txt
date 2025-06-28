@@ -1,0 +1,28 @@
+Topics: Searching
+
+class Solution {
+    public static ArrayList<Integer> countLessEq(int a[], int b[]) {
+        // code here
+        int max = b[0];
+        
+        for(int i : b )max = Math.max(i,max); //--- O(m)
+        int[] preCom = new int[max+1];
+        
+        for(int i : b) preCom[i]++; //--- O(m)
+        
+        for(int i = 1 ; i <= max ; i++) preCom[i] += preCom[i-1]; //--- O(max(b))
+        
+        ArrayList<Integer> ans = new ArrayList<>();
+        
+        for(int i : a){ //--- O(n)
+           if(i>max) ans.add(preCom[max]);
+           else ans.add(preCom[i]); 
+        } 
+        
+        return ans;
+        
+    }
+}
+
+Time Complexity: O(n + m + max(b))
+Auxiliary Space: O(max(b))
