@@ -1,0 +1,30 @@
+Topics: Two Pointers
+
+class Solution {
+    private int mod = 1000000007;
+     private void precomputePowerOfTwo(int[] powerOfTwo, int n) {
+        powerOfTwo[0] = 1;
+        for (int i = 1; i < n; ++i) {
+            powerOfTwo[i] = (int)((powerOfTwo[i - 1] * 2L) % mod);
+        }
+    }
+    public int numSubseq(int[] nums, int target) {
+        int n = nums.length;
+        int[] powOf = new int[n];
+        precomputePowerOfTwo(powOf, n);
+        Arrays.sort(nums);
+        int l = 0 , r = n-1, ans = 0;
+        
+        while(l<=r){
+            if(nums[r]+nums[l]<=target){
+            ans = ((ans + powOf[r-l]) % mod);
+            l++;
+            }else r--;  
+        }
+        return ans;
+    }
+}
+
+
+Time Complexity: O(nlogn);
+Auxiliary Space: O(n);
