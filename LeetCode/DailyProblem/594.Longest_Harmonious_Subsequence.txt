@@ -1,0 +1,29 @@
+Topic: Sliding Window, Sorting, Hash Table
+
+class Solution {
+    public int findLHS(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        int maxLen = 0 , i = 0 , j = 0;
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        
+        while(j<n){
+          if(nums[j]>max) max = nums[j];
+          if(nums[j]<min) min = nums[j];
+          while(max-min>1){
+           i++;
+           min = nums[i];
+
+          }
+
+          if(max-min==1) maxLen = Math.max(maxLen,j-i+1);
+          j++;
+        }
+
+        return maxLen;
+    }
+}
+
+Time Complexity: O(n)
+Space Complexity: O(1)
