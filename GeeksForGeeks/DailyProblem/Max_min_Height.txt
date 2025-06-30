@@ -1,0 +1,40 @@
+Topics: Greedy, Binary Search
+
+class Solution {
+    public boolean isPos(int[] arr, int k, int w, int target){
+        int n = arr.length;
+        int[] diff = new int[n + 1];
+        int curr = 0;
+        int days = 0;
+    
+        for (int i = 0; i < n; i++) {
+            curr += diff[i];
+            if (arr[i] + curr < target) {
+                int need = target - (arr[i] + curr);
+                days += need;
+                if (days > k) return false;
+                curr += need;
+                if (i + w <= n) diff[i + w] -= need;
+            }
+        }
+        return true;
+    }
+
+    public int maxMinHeight(int[] arr, int k, int w) {
+        // code here
+        int low = arr[0];
+        for(int a : arr) low = Math.min(a,low);
+        int high = low + k , res = 0;
+        while(low<=high){
+            int mid = low + (high-low)/2;
+            if(isPos(arr, k, w, mid)){
+                res = mid;
+                low = mid + 1;
+            }else high = mid -1;
+        }
+        return res;
+    }
+}
+
+Time Complexity: O(nlogk);
+Auxiliary Space: O(nlogk);
