@@ -1,0 +1,27 @@
+Topics: String, Counting
+
+class Solution {
+    public int possibleStringCount(String word) {
+        int n = word.length() , cnt = 0, ans = 0;
+        char curr = '*';
+        for(int i = 0 ; i < n ; i++){
+            char ch = word.charAt(i);
+            if(curr != ch){
+                if(cnt>1){
+                    ans += (cnt-1);
+                } 
+                cnt = 0;
+            } 
+            curr = ch;
+            cnt++;
+        }
+        if(cnt>1){
+                    System.out.println(cnt-1);
+                    ans += (cnt-1);
+                } 
+        return ans+1;
+    }
+}
+
+Time Complexity: O(n);
+Auxiliary Space: O(1);
