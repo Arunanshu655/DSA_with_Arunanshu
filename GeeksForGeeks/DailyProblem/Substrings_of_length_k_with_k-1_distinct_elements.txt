@@ -1,0 +1,32 @@
+Topics: Sliding-Window, Strings
+
+class Solution {
+    public int substrCount(String s, int k) {
+        // code here
+        int n = s.length();
+        int i = 0, j = 0 ;
+        HashMap<Character,Integer> map = new HashMap<>(); // ----O(26)
+        int ans = 0 , unique = 0;
+        for(j = 0 ; j < k ; j++){ // ---O(k)
+            char ch = s.charAt(j);
+            if(!map.containsKey(ch)) unique++;
+            map.put(ch,map.getOrDefault(ch,0)+1);
+        }
+        if(unique==k-1) ans++;
+        while(j<n){ // ---O(n-k)
+            char ch1 = s.charAt(i);
+            char ch2 = s.charAt(j);
+            
+            if(!map.containsKey(ch2) || map.get(ch2)<=0) unique++;
+            map.put(ch1,map.getOrDefault(ch1,0)-1);
+            map.put(ch2,map.getOrDefault(ch2,0)+1);
+            if(map.containsKey(ch1) && map.get(ch1)<= 0) unique--;
+            if(unique==k-1) ans++;
+            i++;
+            j++;
+        }
+        return ans; // --O(n)
+    }
+}
+
+Time Complexity:
