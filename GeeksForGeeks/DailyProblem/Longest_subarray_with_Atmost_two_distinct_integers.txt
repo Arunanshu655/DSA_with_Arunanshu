@@ -1,0 +1,25 @@
+Topics: Sliding Window, Two Pointer, Hash Table
+
+class Solution {
+    public int totalElements(int[] arr) {
+        // code here
+        int i = 0 , j = 0 , maxLen = 0 , unique = 0;
+        HashMap<Integer,Integer> map = new HashMap<>();  // ---O(3)
+        int n = arr.length;
+        while(j<n){ // ---O(n)
+            map.put(arr[j],map.getOrDefault(arr[j],0)+1);
+            while(map.size()>2){ // ---O(n)
+                map.put(arr[i],map.get(arr[i])-1);
+                if(map.get(arr[i])==0) map.remove(arr[i]);
+                i++;
+            } 
+            // System.out.println(j + ":" + i);
+            maxLen = Math.max(maxLen,j-i+1);
+            j++;
+        }// ---O(n) + O(n)
+        return maxLen; // ---O(n)
+    }
+}
+
+Time Complexity: O(n);
+Auxiliary Space: O(1);
