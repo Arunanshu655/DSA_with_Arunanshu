@@ -1,0 +1,13 @@
+Topics: Bit Manipulation, Math
+
+class Solution {
+    public char kthCharacter(int k) {
+        long bnVal = Integer.toBinaryString(k-1).chars() // ---O(n)
+                         .filter(ch -> ch == '1')
+                         .count();
+        return (char)('a' + (bnVal % 26));
+    }
+}
+
+Time Complexity: O(n);
+Auxiliary Space: O(1);
