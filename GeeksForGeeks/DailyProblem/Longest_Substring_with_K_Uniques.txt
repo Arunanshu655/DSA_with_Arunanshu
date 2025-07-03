@@ -1,0 +1,26 @@
+Topics: Two-pointers-Algorithm, Hash
+
+class Solution {
+    public int longestKSubstr(String s, int k) {
+        // code here
+         int i = 0 , j = 0 , maxLen = -1 , unique = 0;
+        HashMap<Character,Integer> map = new HashMap<>();  // ---O(26)
+        int n = s.length();
+        while(j<n){ // ---O(n)
+            char ch = s.charAt(j);
+            map.put(ch,map.getOrDefault(ch,0)+1);
+            while(map.size()>k){ // ---O(n)
+                char ch1 = s.charAt(i);
+                map.put(ch1,map.get(ch1)-1);
+                if(map.get(ch1)==0) map.remove(ch1);
+                i++;
+            } 
+            if(map.size()==k) maxLen = Math.max(maxLen,j-i+1);
+            j++;
+        }// ---O(n) + O(n)
+        return maxLen; // ---O(n)
+    }
+}
+
+Time Complexity: O(n);
+Auxiliary Space: O(1);
