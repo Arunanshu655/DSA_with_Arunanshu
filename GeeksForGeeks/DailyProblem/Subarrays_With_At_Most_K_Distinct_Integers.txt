@@ -1,0 +1,24 @@
+Topics: Sliding Window, Hash
+
+class Solution {
+    public int countAtMostK(int arr[], int k) {
+        // code here
+        int i = 0 , j = 0 , cnt = 0;
+        HashMap<Integer,Integer> map = new HashMap<>();  // ---O(26)
+        int n = arr.length;
+        while(j<n){ // ---O(n)
+            map.put(arr[j],map.getOrDefault(arr[j],0)+1);
+            while(map.size()>k){ // ---O(n)
+                map.put(arr[i],map.get(arr[i])-1);
+                if(map.get(arr[i])==0) map.remove(arr[i]);
+                i++;
+            } 
+            cnt += (j-i+1);
+            j++;
+        }// ---O(n) + O(n)
+        return cnt; // ---O(n)
+    }
+}
+
+Time Complexity: O(n);
+Auxiliary Space: O(1);
