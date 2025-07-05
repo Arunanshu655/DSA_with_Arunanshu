@@ -1,0 +1,19 @@
+Topics: Hash Table, Counting
+
+class Solution {
+    public int findLucky(int[] arr) {
+        HashMap<Integer,Integer> map = new HashMap<>();
+        int ans = -1;
+        for(int a : arr){
+            map.put(a,map.getOrDefault(a,0)+1);
+        }
+        for(int key : map.keySet()){
+            if(key == map.get(key) && key > ans) ans = key;
+        }
+        return ans;
+
+    }
+}
+
+Time Complexity: O(n);
+Auxiliary Space: O(1);
