@@ -1,0 +1,33 @@
+Topics: Hash, Stack
+
+class Solution {
+    public ArrayList<Integer> findGreater(int[] arr) {
+        // code here
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for(int a : arr) map.put(a,map.getOrDefault(a,0)+1);
+        int max = arr[0];
+        for(int a : arr) max = (map.get(a)>map.get(max))?a:max;
+        int n = arr.length;
+        ArrayList<Integer> ans = new ArrayList<>();
+        Stack<Integer> st = new Stack<>();
+        for(int i = n-1 ; i >= 0 ; i--){
+            
+            while(!st.isEmpty() && map.get(st.peek())<=map.get(arr[i])){
+                st.pop();
+            }
+            if(st.isEmpty()){
+                st.push(arr[i]);
+                ans.add(0,-1);
+            }
+            else {
+                ans.add(0,st.peek());
+                st.push(arr[i]);
+            }
+        }
+        
+        return ans;
+    }
+}
+
+Time Complexity: O(n);
+Auxiliary Space: O(n);
