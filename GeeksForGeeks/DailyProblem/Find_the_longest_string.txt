@@ -1,0 +1,57 @@
+Topics: Trie, Advanced Data Structure
+
+class Solution {
+    public class Node {
+        boolean isEnd ;
+        Node[] next = new Node[26];
+        Node(){
+            this.isEnd = false;
+        }
+    }
+    private Node root = new Node();
+    void insert(String word){
+        int n = word.length();
+            Node temp = root;
+            for(int i = 0 ; i < n ; i++){
+                char ch = word.charAt(i);
+                if(temp.next[ch-'a'] == null){
+                   temp.next[ch-'a'] = new Node();
+                }
+                temp = temp.next[ch - 'a'];
+            }
+            temp.isEnd = true;
+    }
+    boolean search(String word){
+        int n  = word.length();
+        Node crawler = root;
+        for(int i = 0 ; i<n; i++){
+            char ch = word.charAt(i);
+            crawler = crawler.next[ch - 'a'];
+            if(crawler == null || crawler.isEnd == false) return false;
+        }
+        return true;
+    }
+    String lexiMin(String w1, String w2){
+        int n = w1.length();
+        for(int i = 0 ; i < n ; i++){
+            if(w1.charAt(i) < w2.charAt(i)) return w1;
+            else if(w1.charAt(i) > w2.charAt(i)) return w2;
+        }
+        return w1;
+    }
+    public String longestString(String[] words) {
+        // code here
+        for(String word : words) insert(word);
+        String ans = "";
+        for(String word : words){
+            if(search(word)){
+                if(word.length() > ans.length()) ans = word;
+                else if(word.length() == ans.length()) ans = lexiMin(ans,word);
+            }
+        }
+        return ans;
+    }
+}
+
+Time Complexity: O(n * max(word.size()));
+Auxiliary Space: O(n * max(word.size()));
