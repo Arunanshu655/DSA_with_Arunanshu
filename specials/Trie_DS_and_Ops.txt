@@ -1,0 +1,35 @@
+Topic: TRIE
+
+    public class TrieNode {
+        boolean isEnd ;
+        TrieNode[] next = new TrieNode[26];
+        TrieNode(){
+            this.isEnd = false;
+        }
+    }
+    private TrieNode root = new TrieNode();
+
+    // Insert a word into TRIE
+    void insert(String word){  // ------------O(n)
+        int n = word.length();
+            TrieNode temp = root;
+            for(int i = 0 ; i < n ; i++){
+                char ch = word.charAt(i);
+                if(temp.next[ch-'a'] == null){
+                   temp.next[ch-'a'] = new TrieNode();
+                }
+                temp = temp.next[ch - 'a'];
+            }
+            temp.isEnd = true;
+    }
+    // Search a word in a TRIE
+    boolean search(String word){
+        int n  = word.length();
+        TrieNode crawler = root;
+        for(int i = 0 ; i<n; i++){
+            char ch = word.charAt(i);
+            crawler = crawler.next[ch - 'a'];
+            if(crawler == null || crawler.isEnd == false) return false;
+        }
+        return true; // ------------O(n)
+    }
