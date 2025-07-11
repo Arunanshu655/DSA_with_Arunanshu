@@ -1,0 +1,21 @@
+Topics: Dynamic Programming
+
+class Solution {
+    public int countConsec(int n) {
+        // code here
+        int prev = 0;
+        int curr = 1;
+        int next ;
+        int ans = 1;
+        for(int i = 2 ; i < n ; i++){
+            next = prev + curr;
+            ans = 2 * ans + next;
+            prev = curr;
+            curr = next;
+        }
+        return ans;
+    }
+}
+
+Time Complexity: O(n);
+Auxiliary Space: O(1);
