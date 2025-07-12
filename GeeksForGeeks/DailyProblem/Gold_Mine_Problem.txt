@@ -1,0 +1,39 @@
+Topics: Dynamic PRogramming
+
+class Solution {
+    public int solve(int[][] mat,int i,int j,int n,int m){
+        if(j==m-1) return mat[i][j];
+        
+        int diaU = (i-1>=0) ? solve(mat,i-1,j+1,n,m) : Integer.MIN_VALUE;
+        int diaD = (i+1<n) ? solve(mat,i+1,j+1,n,m) : Integer.MIN_VALUE;
+        return mat[i][j] + Math.max(diaU,Math.max(diaD,solve(mat,i,j+1,n,m)));
+    }
+    public int solveTab(int[][] mat){
+        int n = mat.length;
+        int m = mat[0].length;
+        
+        for(int j = m-2; j >= 0; j--){
+            for(int i = 0; i <n ; i++){
+                int diaU = (i-1>=0) ? mat[i-1][j+1] : Integer.MIN_VALUE;
+                int diaD = (i+1<n) ? mat[i+1][j+1] : Integer.MIN_VALUE;
+                mat[i][j] +=  Math.max(diaU,Math.max(diaD,mat[i][j+1]));
+            }
+        }
+        int ans = Integer.MIN_VALUE;
+        for(int i = 0 ; i < n ; i++) ans = Math.max(ans,mat[i][0]);
+        return ans;
+    }
+    public int maxGold(int[][] mat) {
+        // code here
+        int n = mat.length;
+        int m = mat[0].length;
+        // for(int i = 0 ; i < n ; i++)ans = Math.max(ans, solve(mat,i,0,n,m));
+        // return ans;
+        int ans = solveTab(mat);
+        return ans;
+
+    }
+}
+
+Time Complexity: O(n * m);
+Auxiliary Space: O(1);
