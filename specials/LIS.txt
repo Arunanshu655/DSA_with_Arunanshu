@@ -1,0 +1,48 @@
+Topics: LIS array Contruction
+
+//LIS for MIN SUM
+
+    public int[] LisMinSum(int[] arr) {
+        // code here
+        int n = arr.length;
+        int[] len = new int[n];
+        int[] sum = new int[n];
+        Arrays.fill(len,1);
+        sum[0] = arr[0];
+        for(int i = 1 ; i <n ; i++){
+            totalSum += arr[i];
+            sum[i] = arr[i];
+            for(int j = 0 ; j < i ; j++){
+                if(arr[j]<arr[i] && len[j]+1>=len[i]){
+                    len[i] = len[j] + 1;
+                    sum[i] = arr[i] + sum[j];
+                    maxLen = Math.max(len[i],maxLen);
+                }
+            }
+        }
+        
+        return sum;
+     }
+
+//LIS for MAX SUM
+    public int[] LisMinSum(int[] arr) {
+        // code here
+        int n = arr.length;
+        int[] len = new int[n];
+        int[] sum = new int[n];
+        Arrays.fill(len,1);
+        sum[0] = arr[0];
+        for(int i = 1 ; i <n ; i++){
+            totalSum += arr[i];
+            sum[i] = arr[i];
+            for(int j = 0 ; j < i ; j++){
+                if(arr[j]<arr[i] && len[j]+1>=len[i]){
+                    len[i] = len[j] + 1;
+                    sum[i] = arr[i] + sum[j];
+                    maxLen = Math.max(len[i],maxLen);
+                }
+            }
+        }
+        
+        return sum;
+     }
