@@ -5,9 +5,9 @@ class Solution {
         int n = players.length;
         int m = trainers.length;
         int i = 0 , j = 0, ans = 0;
-        Arrays.sort(players);
+        Arrays.sort(players); // -----------o(nlogn)
         Arrays.sort(trainers);
-        while(i<n && j<m){
+        while(i<n && j<m){ // -----------o(min(m,n))
            if(players[i]<=trainers[j]){
             i++;
             ans++;
