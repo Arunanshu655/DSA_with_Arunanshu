@@ -1,0 +1,21 @@
+Topics: Arrays, Searching
+
+class Solution {
+    public int missingNumber(int[] arr) {
+        // code here
+        for(int i = 1 ; i <= 100000 ; i++){
+            boolean isGot = false;
+            for(int a : arr){
+                if(a==i){
+                    isGot = true;
+                    continue;
+                }
+            }
+            if(isGot==false) return i;
+        }
+        return 100001;
+    }
+}
+
+Time Complexity: O(n)
+Auxiliary Space: O(1)
