@@ -1,0 +1,30 @@
+Topics: Arrays, Kedane
+
+class Solution {
+    public int circularSubarraySum(int arr[]) {
+        // code here
+        int n = arr.length;
+        int max = arr[0];
+        int min = arr[0];
+        int totalSum = arr[0];
+        int currMin = arr[0];
+        int currMax = arr[0];
+        
+        for(int i = 1 ; i<n ; i++){
+            currMax = Math.max(currMax+arr[i],arr[i]);
+            max = Math.max(currMax,max);
+            
+            currMin = Math.min(currMin+arr[i],arr[i]);
+            min = Math.min(currMin,min);
+            
+            totalSum += arr[i];
+        }
+        
+        int cirSum = totalSum - min;
+        if(min == totalSum) return max;
+        return Math.max(cirSum,max);
+    }
+}
+
+Time Complexity: O(n)
+Auxiliary Space: O(1)
