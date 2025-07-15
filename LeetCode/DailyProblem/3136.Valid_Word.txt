@@ -1,0 +1,22 @@
+Topics: String
+
+class Solution {
+    public boolean isValid(String word) {
+        int n = word.length();
+        boolean isVow = false;
+        boolean isCon = false;
+
+        for(int i = 0 ; i <n ; i++){
+            char ch = word.charAt(i);
+            if(!(ch>='0' && ch<='9') && !(ch>='a' && ch<='z') && !(ch>='A' && ch<='Z')) return false;
+            if(ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u') isVow = true;
+            else if(ch=='A' || ch=='E' || ch=='I' || ch=='O' || ch=='U') isVow = true;
+            else if((ch>='a' && ch<='z') || (ch>='A' && ch<='Z')) isCon = true;
+        }
+
+        return ((n>=3) && isVow && isCon);
+    }
+}
+
+Time Complexity:O(n)
+Auxiliary Space: O(1)
