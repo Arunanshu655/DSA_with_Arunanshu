@@ -1,0 +1,41 @@
+Topics: String, Design-pattern
+
+class Solution {
+    public int myAtoi(String s) {
+        // code here
+        boolean isNeg = false, isSign = false, allowZeros = false, isStarted = false;
+        int n = s.length();
+        long num = 0;
+        for(int i = 0 ; i < n ; i++){
+            char ch = s.charAt(i);
+            if((ch - '0' )== 0 && !allowZeros) continue;
+            else if(ch>='0' && ch <='9')
+            {
+                isSign = true;
+                allowZeros = true;
+                isStarted = true;
+                num = (num*10) + (ch - '0');
+            }
+            else if(!isSign && ch == '-'){
+               isNeg = true; 
+               isSign = true;
+            } 
+            else if(!isSign && ch == '+'){
+                isSign = true;
+                continue;
+            } 
+            else if(!isStarted && ch == ' ') continue;
+            else break;
+            
+        }
+        if(num>Integer.MAX_VALUE){
+            if(isNeg) return Integer.MIN_VALUE;
+            else return Integer.MAX_VALUE;
+        }
+        int intNum = (int) num;
+        return isNeg ? (0-intNum) : intNum;
+    }
+}
+
+Time Complexity: O(n)
+Auxiliary Space: O(1)
