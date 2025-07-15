@@ -1,0 +1,16 @@
+Topics: Mathematics
+
+class Solution {
+    public boolean divby13(String s) {
+        // code here
+        int n = s.length();
+        int num = 0;
+        for(int i = 0 ; i < n ; i++){
+            num = ((num*10)+(s.charAt(i)-'0')) % 13;
+        }
+        return (num==0);
+    }
+}
+
+Time Complexity: O(n)
+Auxiliary Space: O(1)
