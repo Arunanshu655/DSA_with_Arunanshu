@@ -1,0 +1,22 @@
+Topics: Prime 
+
+Class Solution{
+     public static ArrayList<Integer> primeNumbers(int k){
+            boolean[] sieve = new boolean[k+1];
+            Arrays.fill(sieve,true);
+            sieve[0] = sieve[1] = false;
+    
+            for (int i = 2; i * i <= k; i++) {
+                if (sieve[i]) {
+                    for (int j = i * i; j <= k; j += i) {
+                        sieve[j] = false;
+                    }
+                }
+            }
+    
+            
+            //ArrayList with primes
+            ArrayList<Integer> primes = new ArrayList<>();
+            for(int i = 2 ; i < k ; i++)if(sieve[i]) primes.add(i);
+            }
+}
