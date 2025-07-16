@@ -1,0 +1,63 @@
+Topics: Sieve, Searching, Prime Numbers
+
+class Solution {
+    public static boolean isPowerOf(int a, int n){
+        long temp = 1;
+        for(int i = 0 ; i < 8 ; i++){
+            temp *= a;
+            if(temp > n) return false;
+        }
+        return true;
+    }
+    public static int countNumbers(int n) {
+        // code here
+        int k = (int) Math.sqrt(n);
+        boolean[] sieve = new boolean[k+1];
+        Arrays.fill(sieve,true);
+        sieve[0] = sieve[1] = false;
+
+        for (int i = 2; i * i <= k; i++) {
+            if (sieve[i]) {
+                for (int j = i * i; j <= k; j += i) {
+                    sieve[j] = false;
+                }
+            }
+        }
+
+        
+        //ArrayList with primes
+        ArrayList<Integer> primes = new ArrayList<>();
+        for(int i = 2 ; i < k ; i++)if(sieve[i]) primes.add(i);
+        
+        // for(int a : primes) System.out.print(a+" ");
+        int m = primes.size();
+        int cnt = 0;
+        
+        //check for p^8
+        for(int i = 0 ; i < m ; i++){
+            if(isPowerOf(primes.get(i),n)){
+            //   System.out.print(primes.get(i)+" ");
+               cnt++; 
+            } 
+        }
+        
+        //check for p^2 * p^2
+        for(int i = 0 ; i < m ; i++){
+            for(int j = i+1 ; j < m ; j++){
+                int a1 = primes.get(i);
+                int a2 = primes.get(j);
+                long num = 1L * a1 * a1 * a2 * a2;
+                if(num<=n){
+                //   System.out.print(num+" ");
+                   cnt++; 
+                }
+                else break;
+            }
+        }
+        
+        return cnt;
+    }
+}
+
+Time Complexity: O(sqrt(n) * log(log(sqrt(n))))
+Auxiliary Space: O(sqrt(n))
