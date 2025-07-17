@@ -1,0 +1,56 @@
+Topics: Number-Thoery, Mathematics
+
+class Solution {
+     public static ArrayList<Integer> primeNumbers(int k){
+            boolean[] sieve = new boolean[k+1];
+            Arrays.fill(sieve,true);
+            sieve[0] = sieve[1] = false;
+    
+            for (int i = 2; i * i <= k; i++) {
+                if (sieve[i]) {
+                    for (int j = i * i; j <= k; j += i) {
+                        sieve[j] = false;
+                    }
+                }
+            }
+    
+            
+            //ArrayList with primes
+            ArrayList<Integer> primes = new ArrayList<>();
+            for(int i = 2 ; i <= k ; i++)if(sieve[i]) primes.add(i);
+            
+            return primes;
+        }
+    public int maxKPower(int n, int k) {
+        // code here
+        ArrayList<Integer> primes = primeNumbers(k);
+        HashMap<Integer,Integer> map = new HashMap<>();
+        
+        int tempK = k;
+        for (int i = 2; i * i <= tempK; i++) {
+            while (tempK % i == 0) {
+                map.put(i, map.getOrDefault(i, 0) + 1);
+                tempK /= i;
+            }
+        }
+        if (tempK > 1) {
+            map.put(tempK, 1);
+        }
+        
+        int minKMade = Integer.MAX_VALUE;
+        for(int prime : map.keySet()){
+            int temp = n;
+            int tempMin = 0;
+            while(temp>=prime){
+                tempMin += temp/prime;
+                temp = temp/prime;
+            }
+            minKMade = Math.min(minKMade,tempMin/map.get(prime));
+        }
+        return minKMade;
+    }
+}
+
+
+Time Complexity: O(sqrt(k) + m * log n), m = number of distinct prime factors in k
+Auxiliary Space: O(m), m = number of distinct prime factors in k
