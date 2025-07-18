@@ -1,0 +1,30 @@
+Topics: Mathematics
+
+class Solution {
+    long gcd(long a, long b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+
+    long lcm(long a, long b) {
+        return (a * b) / gcd(a, b);
+    }
+    int lcmTriplets(int n) {
+        // code here
+        if (n == 1 || n == 2) return n;
+        if (n == 3) return 6;
+
+        long ans = 0;
+        if (n % 2 != 0) {
+            ans = lcm(n, lcm(n - 1, n - 2));
+        } else {
+            // Try (n, n-1, n-3) and (n-1, n-2, n-3)
+            long l1 = lcm(n, lcm(n - 1, n - 3));
+            long l2 = lcm(n - 1, lcm(n - 2, n - 3));
+            ans = Math.max(l1, l2);
+        }
+        return (int) ans;
+    }
+}
+
+Time Complexity: O(1);
+Auxiliary Space:O(1);
