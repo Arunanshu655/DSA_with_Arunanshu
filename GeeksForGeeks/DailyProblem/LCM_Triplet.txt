@@ -1,4 +1,4 @@
-Topics: Mathematics
+Topics: Mathematical
 
 class Solution {
     long gcd(long a, long b) {
