@@ -1,0 +1,20 @@
+Topics: DFS , String
+
+class Solution {
+    public List<String> removeSubfolders(String[] folder) {
+        Arrays.sort(folder); // Sort lexicographically
+        List<String> ans = new ArrayList<>();
+        String prev = ""; // Last added root folder
+
+        for (String dir : folder) {
+            if (prev.equals("") || !dir.startsWith(prev + "/")) {
+                ans.add(dir);
+                prev = dir;
+            }
+        }
+        return ans;
+    }
+}
+
+Time complexity:O(n * m)
+Auxiliary Space: O(m + n)
