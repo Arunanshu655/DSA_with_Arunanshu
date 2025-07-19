@@ -1,0 +1,28 @@
+Topics: Combinatorial
+
+class Solution {
+    public int factorial(int n){
+        if(n==0) return 0;
+        if(n==1) return 1;
+        return n * factorial(n-1);
+    }
+    public int vowelCount(String s) {
+        // code here
+        int n = s.length();
+        HashMap<Character,Integer> map = new HashMap<>();
+        for(int i = 0 ; i < n ; i++){
+            char ch = s.charAt(i);
+            if(ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u'){
+                map.put(ch,map.getOrDefault(ch,0)+1);
+            }
+        }
+        int ans = factorial(map.size());
+        for(char key : map.keySet()){
+            ans *= map.get(key);
+        }
+        return ans;
+    }
+}
+
+Time Complexity: O(n)
+Auxiliary Space: O(1)
