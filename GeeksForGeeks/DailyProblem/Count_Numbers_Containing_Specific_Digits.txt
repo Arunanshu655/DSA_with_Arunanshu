@@ -1,0 +1,23 @@
+Topics: Mathematical
+
+class Solution {
+    public int countValid(int n, int[] arr) {
+        // code here
+        HashSet<Integer> uniques = new HashSet<>();
+        for(int a : arr) uniques.add(a);
+        long totalPoss = (long) Math.pow(10,n-1) * 9;
+        
+        long inValids ;
+        if(uniques.contains(0)){
+            inValids = (long) Math.pow(10-uniques.size(),n-1) * (10-uniques.size());
+        }else{
+            inValids = (long) Math.pow(10-uniques.size(),n-1) * (9-uniques.size());
+        }
+        
+        
+        return (int) (totalPoss-inValids);
+    }
+}
+
+Time Complexity: O(log n)
+Auxiliary Space: O(1)
