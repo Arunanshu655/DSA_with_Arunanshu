@@ -1,0 +1,22 @@
+Topics: String
+
+class Solution {
+    public String makeFancyString(String s) {
+        StringBuilder ans  = new StringBuilder("");
+        ans.append(s.charAt(0));
+        if(s.length()<3) return s;
+        int cnt = 1;
+        int n = s.length();
+        for(int i = 1 ; i < n ;i++){
+            
+            if(s.charAt(i) == s.charAt(i-1))cnt++;
+            else cnt = 1;
+            if(cnt<3) ans.append(s.charAt(i));
+        }
+
+        return ans.toString();
+    }
+}
+
+Time COmplexity: O(n)
+Auxiliary Space: O(n)
