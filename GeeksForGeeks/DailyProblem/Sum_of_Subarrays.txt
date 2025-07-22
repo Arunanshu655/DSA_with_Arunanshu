@@ -1,0 +1,20 @@
+Topics: Arrays
+
+
+class Solution {
+    public int subarraySum(int[] arr) {
+        // code here
+        long sum  = 0 ;
+        int n = arr.length;
+        for(int i = 0 ; i < n ; i++){
+            long leftCon = i+1;
+            long rightCon = n-i;
+            sum += (leftCon * rightCon * arr[i]);
+        }
+        return (int) sum;
+    }
+}
+
+
+Time Complexity: O(n)
+Auxiliary Space: O(1)
