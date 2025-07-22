@@ -1,0 +1,22 @@
+Topics : Sliding Window, HashTable
+
+class Solution {
+    public int maximumUniqueSubarray(int[] nums) {
+          HashSet<Integer> set = new HashSet<>();
+          int ans = 0 , sum = 0 ; 
+          int i = 0 , j = 0 , n = nums.length;
+          while(j<n){
+               while(set.contains(nums[j])){
+                    sum -= nums[i];
+                    set.remove(nums[i++]);
+               }
+               sum += nums[j];
+               set.add(nums[j++]);
+               ans = Math.max(ans,sum);
+          }
+          return ans;
+    }
+}
+
+Time Coplexity: O(n)
+Auxiliary Space: O(1)
