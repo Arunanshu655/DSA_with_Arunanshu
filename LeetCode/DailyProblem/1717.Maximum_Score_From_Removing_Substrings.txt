@@ -1,0 +1,40 @@
+Topics : Stack Implementation, Greedy
+
+class Solution {
+    public int helper(String pat , StringBuilder[] s, int pnts){
+        int n = s[0].length();
+        if(n<2) return 0;
+        
+        StringBuilder newSb = new StringBuilder("");
+        int ans = 0;
+        for(int i = 0 ; i < n ; i++){
+            if(newSb.length()>0 && newSb.charAt(newSb.length() - 1)== pat.charAt(0) && s[0].charAt(i)==pat.charAt(1)){
+                ans += pnts;
+                newSb.deleteCharAt(newSb.length() - 1);
+            }else{
+                newSb.append(s[0].charAt(i));
+            }
+        }
+        s[0] = newSb;
+        return ans;
+        
+    }
+    public int maximumGain(String s, int x, int y) {
+        int n = s.length() , i = 0;
+        StringBuilder[] sb = new StringBuilder[1];
+        sb[0] = new StringBuilder(s);
+        int ans = 0;
+        if(x>y){
+            ans += helper("ab",sb,x);
+            ans += helper("ba",sb,y);
+        }else{
+            ans += helper("ba",sb,y);
+            ans += helper("ab",sb,x);
+        }
+
+        return ans;
+    }
+}
+
+Time Complexity: O(n)
+Auxiliary Space: O(n)
