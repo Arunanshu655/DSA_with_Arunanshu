@@ -1,0 +1,16 @@
+Topics: Greedy
+
+class Solution {
+
+    public int getLastMoment(int n, int left[], int right[]) {
+        // code here
+        int maxTime = 0;
+        for(int l : left) maxTime = Math.max(maxTime,l);
+        for(int r : right) maxTime = Math.max(maxTime,n-r);
+        
+        return maxTime;
+    }
+}
+
+Time Complexity: O(n + m)
+Auxiliary Space: O(1)
