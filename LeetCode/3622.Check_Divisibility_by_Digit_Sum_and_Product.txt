@@ -1,0 +1,29 @@
+Topic : Math
+
+//QS: 
+You are given a positive integer n. Determine whether n is divisible by the sum of the following two values:
+
+//The digit sum of n (the sum of its digits).
+
+//The digit product of n (the product of its digits).
+
+//Return true if n is divisible by this sum; otherwise, return false.
+
+
+
+//Code:
+class Solution {
+    public boolean checkDivisibility(int n) {
+        int sum = 0 , prod = 1 , nCpy = n;
+        while(n>0){
+            sum += (n%10);
+            prod *= (n%10);
+            n = n / 10;
+        }
+
+        return ((nCpy % (sum + prod)) == 0);
+    }
+}
+
+Time Complexity : O(logn)
+Auxiliary Space: O(1)
