@@ -1,0 +1,28 @@
+Topics: Matrix
+
+class Solution {
+    public static int balanceSums(int[][] mat) {
+        // code here
+        int max=0, n = mat.length, col = 0;
+        for(int i = 0 ; i < n; i++){
+            col += mat[i][0];
+            for(int j = 1 ; j < n ; j++){
+                mat[i][0] += mat[i][j];
+                if(i!=0) mat[0][j] += mat[i][j];
+            }
+            max = Math.max(mat[i][0],max);
+        } // ------------O(n^2)
+        max = Math.max(col,max);
+        for(int i = 1 ; i < n ; i++) max = Math.max(max,mat[0][i]);  // ------------O(n)
+        int ops = 0;
+       
+        for(int i = 0 ; i < n; i++){
+            ops += (max-mat[i][0]);
+        }  // ------------O(n)
+        
+        return ops;
+    }
+}
+
+Time Complexity: O(n^2)
+Auxiliary Space: O(1)
