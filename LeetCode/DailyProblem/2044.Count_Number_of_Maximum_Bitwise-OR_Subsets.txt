@@ -1,0 +1,21 @@
+Topics : Bit Manipulation, Backtracking
+
+class Solution {
+    private int ans = 0;
+    public void solve(int[] nums, int idx, int sum, int maxOr){
+          if(idx==nums.length) return ;
+          if((sum | nums[idx]) == maxOr) ans++;
+          solve(nums, idx+1,sum | nums[idx], maxOr);
+          solve(nums, idx+1, sum, maxOr);
+    }
+    public int countMaxOrSubsets(int[] nums) {
+          int maxOr = 0;
+          for(int num : nums) maxOr |= num;
+          Arrays.sort(nums);
+          solve(nums,0,0,maxOr);
+          return ans;
+    }
+}
+
+Time Complexity: O(2^n)
+Auxiliary Space: O(1)
