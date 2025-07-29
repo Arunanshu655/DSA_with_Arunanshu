@@ -1,0 +1,44 @@
+Topics: prefixSum
+
+class Solution {
+    public ArrayList<Integer> asciirange(String s) {
+        // code here
+        long[] fst = new long[26]; //-----O(26)
+        long[] lst = new long[26];  //-----O(26)
+        boolean[] done = new boolean[26];  //-----O(26)
+        
+        Arrays.fill(fst,-1); //-----O(26)
+        Arrays.fill(lst,-1); //-----O(26)
+        
+        int n = s.length();
+        long sum = 0;
+        
+        for(int i = 0 ; i < n ; i++){ //-----O(n)
+            char ch = s.charAt(i);
+            sum += ch;
+            if(fst[ch-'a']==-1) fst[ch-'a'] = sum;
+            lst[ch-'a'] = sum;
+        }
+        
+        int j = 0;
+        
+        ArrayList<Integer> ans = new ArrayList<>();
+        
+        while(j<n){ //-----O(n)
+            char ch = s.charAt(j);
+            if(!done[ch-'a']){
+                int currSum = (int)(lst[ch-'a']-fst[ch-'a']-ch);
+                if(currSum>0){
+                    ans.add(currSum);
+                    done[ch-'a'] = true;
+                } 
+            }
+            j++;
+        }
+        
+        return ans; //-----O(n)
+    }
+}
+
+Time Complexity: O(n)
+Auxiliary Space: O(1)
