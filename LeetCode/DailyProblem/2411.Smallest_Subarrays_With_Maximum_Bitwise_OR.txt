@@ -1,0 +1,42 @@
+Topics: Bit manipulation, Greedy
+
+class Solution {
+
+    public int[] smallestSubarrays(int[] nums) {
+        int n = nums.length;
+        int[] ans = new int[n];
+        Arrays.fill(ans,1);
+        int maxOr = 0;
+        for(int num : nums){
+           maxOr |= num;
+        }
+        if (maxOr == 0) {
+            return ans;
+        }
+        int bits = (int)(Math.floor(Math.log(maxOr) / Math.log(2))) + 1;
+        
+        
+        
+        int[] bitArr = new int[bits];
+        Arrays.fill(bitArr,n);
+        
+        for(int bit : bitArr) System.out.print(bit+" ");
+        for(int i = n - 1 ; i >= 0 ; i--){
+            int nearest = i;
+            for(int j = 0 ; j < bits ; j++){
+                if((nums[i] & (1<<j)) != 0){
+                    bitArr[j] = i;
+                }else{
+                    if(bitArr[j]!=n){
+                        nearest = Math.max(bitArr[j],nearest);
+                    }
+                }
+            }
+            ans[i] = nearest - i + 1;
+        }
+        return ans;
+    }
+}
+
+Time Complexity : O(nlogn)
+Auxiliary Space: O(logn)
