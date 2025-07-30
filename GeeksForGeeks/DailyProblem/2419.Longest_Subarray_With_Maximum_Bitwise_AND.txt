@@ -1,0 +1,26 @@
+Topics: Bitmanipulation, Brainteaser
+
+class Solution {
+    public int longestSubarray(int[] nums) {
+        int maxLen = 0, len = 0, maxCurr = -1, curr = -1 ;
+        for(int num : nums){
+            if(curr == -1 || num > maxCurr ){
+                maxCurr = num;
+                maxLen = 1;
+                len = 1;
+            }
+            else if(num==curr) len++;
+            else {
+                if(maxCurr<=curr) maxLen = Math.max(len,maxLen); 
+                len = 1;
+            }
+            curr = num;
+        }
+        if(maxCurr<=curr) maxLen = Math.max(len,maxLen); 
+
+        return maxLen ;
+    }
+}
+
+Time Complexity: O(n);
+Auxiliary Space: O(1);
