@@ -1,0 +1,36 @@
+Topics: Dynamic Programming
+
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
+        temp.add(1);
+        ans.add(new ArrayList<Integer>(temp));
+        if(numRows==1) return ans;
+        temp.add(1);
+        ans.add(new ArrayList<Integer>(temp));
+        if(numRows==2) return ans;
+
+        for(int i = 2 ; i < numRows ; i++){
+            List<Integer> temp1 = new ArrayList<>();
+            temp1.add(1);
+            int prev = 1;
+            boolean isFirst = true;
+            for(int a : ans.get(i-1)){
+                if(isFirst){
+                    isFirst = false;
+                    continue;
+                }
+                temp1.add(prev+a);
+                prev = a;
+            }
+            temp1.add(1);
+            ans.add(temp1);
+        }
+
+        return ans;
+    }
+}
+
+Time Complexity: O(n^2);
+Auxiliary Space: O(n^2);
