@@ -1,0 +1,26 @@
+Topics: Prefix-sum, Hash
+
+class Solution {
+    public boolean isVowel(char ch){
+        return (ch=='a'||ch=='o'||ch=='e'||ch=='i'||ch=='u');
+    }
+    public int countBalanced(String[] arr) {
+        // code here
+        HashMap<Integer,Integer> map = new HashMap<>();
+        map.put(0,1);
+        int ans = 0;
+        int tracker = 0;
+        for(String a : arr){
+            for(char ch : a.toCharArray()){
+                if(isVowel(ch)) tracker++;
+                else tracker--;
+            }
+            ans += map.getOrDefault(tracker,0);
+            map.put(tracker,map.getOrDefault(tracker,0)+1);
+        }
+        return ans;
+    }
+}
+
+Time Complexity: O(n)
+Auxiliary Space: O(n)
