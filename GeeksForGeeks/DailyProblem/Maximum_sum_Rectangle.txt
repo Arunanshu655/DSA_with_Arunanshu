@@ -1,0 +1,26 @@
+Topics: Prefix-Sum, Matrix, Kedane
+
+class Solution {
+    public int maxRectSum(int mat[][]) {
+        // code here
+        int n = mat.length , m = mat[0].length, ans = Integer.MIN_VALUE;
+        for(int i = 0 ; i < m ; i++){
+            int[] temp = new int[n];
+            for(int j = i ; j < m ; j++){
+                for(int k = 0 ; k < n ; k++) temp[k] += mat[k][j];
+                
+                int sum = 0 , maxi = Integer.MIN_VALUE;
+                for(int k = 0 ; k < n ; k++){
+                    sum = Math.max(sum+temp[k],temp[k]);
+                    maxi = Math.max(maxi,sum);
+                }
+                ans = Math.max(ans,maxi);
+            }
+        }
+        return ans;
+        
+    }
+};
+
+Time Complexity: O(n*m^2)
+Auxiliary Space: O(n)
