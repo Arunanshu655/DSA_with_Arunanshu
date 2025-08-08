@@ -1,0 +1,29 @@
+Topics: String, KMP
+
+class Solution {
+    int getLPSLength(String s) {
+        // code here
+        int len = 0 , n = s.length();
+        if(n==1) return 0;
+        int[] prefix = new int[n];
+        
+        int i = 0 , j = 1;
+        for(;j<n ; j++){
+            
+            while(i>0 && s.charAt(i)!=s.charAt(j)){
+                len = prefix[i-1];
+                i = prefix[i-1];
+                
+            } 
+            if(s.charAt(i)==s.charAt(j)){
+               len++;
+               i++;
+            } 
+            prefix[j] = len;
+        }
+        
+        return prefix[n-1];
+    }
+}
+Time Complexity: O(n)
+Auxiliary Space: O(n)
