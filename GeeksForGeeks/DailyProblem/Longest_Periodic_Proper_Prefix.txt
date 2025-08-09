@@ -1,0 +1,45 @@
+Topics: Stirngs, Z-Algorithm
+
+class Solution {
+    int[] genZArr(String s){
+        int left = 0, right = 0, n = s.length();
+        int[] zArr = new int[n];
+        
+        for(int k=1 ; k < n ;k++){
+            if(k>right){
+                left = k;
+                right = k;
+                while(right<n && s.charAt(right-left)==s.charAt(right)){
+                    right++;
+                }
+                zArr[k] = right - left;
+                right--;
+            }else{
+                int k1 = k - left;
+                if(zArr[k1]<right-k+1){
+                    zArr[k] = zArr[k1];
+                }else{
+                    left = k;
+                    while(right<n && s.charAt(right-left)==s.charAt(right)){
+                    right++;
+                }
+                zArr[k] = right-left;
+                right--;
+                }
+            }
+        }
+        return zArr;
+    }
+    int getLongestPrefix(String s) {
+        // code here
+        int[] z = genZArr(s);
+        int n = s.length();
+        for(int i = n - 1 ; i>=0 ; i--){
+            if(z[i]==n-i) return i;
+        }
+        return -1;
+     }
+}
+
+Time Complexity: O(n)
+Auxiliar Space: O(n)
