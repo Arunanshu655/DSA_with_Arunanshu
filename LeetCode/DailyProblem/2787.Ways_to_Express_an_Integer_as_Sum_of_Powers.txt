@@ -1,0 +1,34 @@
+Topics: Dynamic Programming
+
+class Solution {
+    public int MOD = (int)1e9 + 7;
+    public int maxInt ;
+    public int solve(int n, int x, int digit, int sum, int[][] dp, int[] powers){
+          int powX = powers[digit]; // digit^x
+          
+          sum += powX;
+          if(sum>n) return 0;
+          else if(sum==n) return 1;
+          if(dp[digit][sum] != -1) return dp[digit][sum];
+          int ans = 0;
+          for(int i = digit+1 ;  i <= maxInt ; i++){
+             ans += (solve(n, x, i, sum, dp, powers) % MOD);
+             ans %= MOD;
+          }
+          dp[digit][sum] = ans;
+          return ans;
+    }
+    public int numberOfWays(int n, int x) {
+        maxInt = (int) (Math.pow(n, 1.0 / x)) + 1;
+        int[] powers = new int[maxInt+1];
+            for (int i = 1; i <= maxInt; i++) {
+                powers[i] = (int)Math.pow(i, x);
+            }
+
+        int[][] dp = new int[maxInt+1][n+1];
+        for(int[] d : dp) Arrays.fill(d,-1);
+        return (solve(n, x, 0, 0, dp, powers)%MOD);
+    }
+}
+
+Time Complexity: O(n^(1/x) * n)
