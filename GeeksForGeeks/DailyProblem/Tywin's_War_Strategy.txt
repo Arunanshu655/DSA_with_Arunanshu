@@ -1,0 +1,30 @@
+Topics: Sorting
+
+class Solution {
+    public int minSoldiers(int[] arr, int k) {
+        // code here
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a,b)->{
+            return ((b%k) - (a%k));
+        });
+        int n = arr.length, luckies = 0;
+        for(int i = 0 ; i < n ; i++){
+            if(arr[i]%k==0) luckies++;
+            else pq.add(arr[i]);
+        }
+        
+        if(luckies*2>=n) return 0;
+        int cnt = 0;
+        while(!pq.isEmpty()){
+            int curr = pq.poll();
+            // System.out.println(curr+":"+(k-(curr % k)));
+            cnt += (k-(curr % k));
+            luckies++;
+            if(luckies*2>=n) return cnt;
+        }
+        
+        return cnt;
+    }
+}
+
+Time COmplexity: O(nlogn)
+Auxiliary Space: O(n)
