@@ -1,0 +1,27 @@
+Topics: String
+
+class Solution {
+    public String largestGoodInteger(String num) {
+        int n = num.length();
+        String ans = "$";
+        String curr = "$";
+        for(int i = 0 ; i < n ; i++){
+            char ch = num.charAt(i);
+            if(ch==curr.charAt(0)){
+                if(curr.length()==3) continue;
+                else curr += ch;
+            }else{
+                if(curr.length()==3 && curr.charAt(0)>ans.charAt(0)) ans = curr;
+                curr = "";
+                curr += ch;
+            }
+        }
+        if(curr.length()==3 && curr.charAt(0)>ans.charAt(0)) ans = curr;
+        if(ans.charAt(0)=='$') return "";
+
+        return ans;
+    }
+}
+
+Time Complexity: O(n)
+Auxiliary Space: O(1)
