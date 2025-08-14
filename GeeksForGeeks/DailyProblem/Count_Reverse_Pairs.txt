@@ -1,0 +1,47 @@
+Topics: Binary Search, Segment-Tree, Binary Indexed Tree, Divide and Conquer, Merge Sort
+
+class Solution {
+    private int cnt = 0;
+    public void sort(int l, int mid, int r, int[] arr){
+        int i = l , n1 = mid, j = mid+1, n2 = r;
+        
+        for (; i <= mid; i++) {
+            while (j <= r && (long)arr[i] > 2L * arr[j]) {
+                j++;
+            }
+            cnt += j - (mid + 1);
+        }
+        i = l ;
+        j = mid+1;
+        int[] a = new int[r-l+1];
+        int idx = 0;
+        while(i<=n1 && j<=n2){
+            if(arr[i]>arr[j]) a[idx++] = arr[j++];
+            else a[idx++] = arr[i++];
+        }
+        while(i<=n1) a[idx++] = arr[i++];
+        while(j<=n2) a[idx++] = arr[j++];
+        idx = l;
+        for(int a1 : a) arr[idx++] = a1;
+        
+        return ;
+    }
+    public void solve(int l, int r, int[] arr){
+        if(l<r){
+            int mid = l + (r-l)/2;
+            solve(l,mid,arr);
+            solve(mid+1,r,arr);
+            sort(l,mid,r,arr);
+        }
+    }
+    public int countRevPairs(int[] arr) {
+        // code here
+        int n = arr.length;
+        solve(0,n-1,arr);
+        return cnt;
+        
+    }
+}
+
+Time Complexity: O(n log n)
+Auxiliary Space: O(n)
