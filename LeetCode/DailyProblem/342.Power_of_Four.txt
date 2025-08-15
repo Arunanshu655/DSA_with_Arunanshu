@@ -1,0 +1,26 @@
+Topics: Bit Manipulation
+
+class Solution {
+    public int countZero(int n){
+      int count = 0;
+      while(n!=0){
+        if((n&1)==0) count++;
+        n >>= 1;
+      }
+      return count;
+    }
+    public boolean isPowerOfFour(int n) {
+        if(n==1) return true;
+        if(n<4) return false;
+        int m = n-1;
+        if((n&m)==0){
+            if(countZero(n)%2==0){
+                return true;
+            }
+        } 
+        return false;
+    }
+}
+
+Time Complexity: O(logn)
+Auxiliary space: O(1)
