@@ -1,0 +1,24 @@
+Topics: Greedy
+
+class Solution {
+    public int maximum69Number (int num) {
+        int ans = 0;
+        int place = 1000;
+        while(place!=0){
+            int dig = ((num / place)%10);
+            if(dig==6){
+                ans += (9 * place);
+                ans += (num%place);
+                break;
+            }
+            ans += (dig*place);
+            place /= 10;
+        }
+        
+        return ans;
+
+    }
+}
+
+Time Complexity: O(1);
+Auxiliary Space: O(1);
