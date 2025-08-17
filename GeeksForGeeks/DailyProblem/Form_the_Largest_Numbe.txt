@@ -1,0 +1,17 @@
+Topics : Sorting
+
+class Solution {
+    public void rearrange(int[] arr, int x) {
+        // code here
+        Integer[] nums = Arrays.stream(arr).boxed().toArray(Integer[]::new);
+        Arrays.sort(nums,(a,b)->{
+            return (Math.abs(a-x) - Math.abs(b-x));
+        });
+        int n = arr.length;
+        for(int i = 0 ; i < n ; i++) arr[i] = nums[i];
+    }
+}
+
+
+Time Complexity: O(n log n)
+Auxiliary Space: O(n)
