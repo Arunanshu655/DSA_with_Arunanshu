@@ -1,16 +1,6 @@
 // Topics: Linked-List
 
-/*
-class Node {
-    int data;
-    Node next;
 
-    Node(int x) {
-        data = x;
-        next = null;
-    }
-}
-*/
 class Solution {
     public int findLength(Node head){
         if(head==null) return 0;
