@@ -20,5 +20,5 @@ class Solution {
     }
 }
 
-// Time Complexity: O(n log n)
+// Time Complexity: O(n log n) n = total number of nodes
 // Auxiliary Space: O(n)
