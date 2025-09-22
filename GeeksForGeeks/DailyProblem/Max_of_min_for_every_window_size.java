@@ -1,4 +1,4 @@
-// Topics : Stack, Sliding-Window
+// Topics: Stack, Sliding-Window
 
 class Solution {
     
