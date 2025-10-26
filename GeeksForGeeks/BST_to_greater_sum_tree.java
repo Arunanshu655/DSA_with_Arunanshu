@@ -29,5 +29,5 @@ class Solution {
     }
 }
 
-// Time Complexity: O(n);
-// Auxiliary Space: O(n);
+// Time Complexity: O(n)
+// Auxiliary Space: O(n)
