@@ -1,7 +1,4 @@
-// Topics: Array
-// Math
-// String
-// Matrix
+// Topics: Array, Math, String, Matrix
 
 class Solution {
     public int numberOfBeams(String[] bank) {
