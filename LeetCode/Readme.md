@@ -9,6 +9,7 @@
 |-----|------|---------|------|
 | 16/11/25 | 1513 | Number of Substrings With Only 1s | [Link](https://github.com/Arunanshu655/DSA_with_Arunanshu/blob/main/LeetCode/DailyProblem/1513.Number_of_Substrings_With_Only_1s.java) |
 | 17/11/25 | 1437 |  Check If All 1's Are at Least Length K Places Away | [Link](https://github.com/Arunanshu655/DSA_with_Arunanshu/blob/main/LeetCode/DailyProblem/1437.Check_If_All_1's_Are_at_Least_Length_K_Places_Away.java) |
+| 18/11/25 | 717 |  1-bit and 2-bit Characters | [Link](https://github.com/Arunanshu655/DSA_with_Arunanshu/blob/main/LeetCode/DailyProblem/717.1-bit_and_2-bit_Characters.java) |
 
 ---
 
