@@ -3,7 +3,7 @@
 class Solution {
     public int intersectionSizeTwo(int[][] intervals) {
         Arrays.sort(intervals, (a,b) -> 
-            a[1] == b[1] ? Integer.compare(b[0], a[0]) : Integer.compare(a[1], b[1]));
+        a[1] == b[1] ? Integer.compare(b[0], a[0]) : Integer.compare(a[1], b[1]));
         int p1 = -1, p2 = -1, cnt = 0;
         for(int[] interval : intervals){
             int start = interval[0], end = interval[1];
