@@ -1,0 +1,12 @@
+// Topics: Array, Math
+class Solution {
+    public int minimumOperations(int[] nums) {
+        int ans = 0;
+        for(int num : nums) if(num % 3 != 0) ans++;
+        return ans;   
+    }
+}
+
+// Time Compelxtiy: O(n)
+// Auxiliary Space: O(1)
+  
